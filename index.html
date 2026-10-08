@@ -74,11 +74,11 @@ h1.dev{font:800 5.6vw/1 var(--disp);margin:0;color:var(--ink);text-wrap:balance;
 .lead{font:700 1.95vw/1.38 var(--govde);max-width:32ch;opacity:.92;margin:0}
 
 .ogretmen{display:flex;align-items:center;gap:1.4vw;margin-top:1.2vh}
-.avatar{width:8.2vw;height:8.2vw;border-radius:50%;position:relative;flex:none}
+.avatar{width:10vw;height:10vw;border-radius:50%;position:relative;flex:none}
 .avatar::before{content:'';position:absolute;inset:-.45vw;border-radius:50%;
   background:conic-gradient(var(--sun),var(--coral),var(--glow),var(--mint),var(--sun));animation:don 7s linear infinite}
-.avatar .ic{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:var(--bg2);display:grid;place-items:center;font-size:3.8vw;border:.38vw solid var(--bg1)}
-.avatar img{width:100%;height:100%;object-fit:cover}
+.avatar .ic{position:absolute;inset:0;border-radius:50%;overflow:hidden;background:var(--bg2);display:grid;place-items:center;font-size:4.6vw;border:.38vw solid var(--bg1)}
+.avatar img,.avatar video{width:100%;height:100%;object-fit:cover;display:block}
 @keyframes don{to{transform:rotate(360deg)}}
 .ogretmen b{display:block;font:800 2.1vw/1 var(--disp)}
 .ogretmen small{display:block;font:700 1.05vw/1.3 var(--govde);opacity:.75;margin-top:.6vh}
@@ -98,7 +98,8 @@ h1.dev{font:800 5.6vw/1 var(--disp);margin:0;color:var(--ink);text-wrap:balance;
 
 .cerceve{position:relative;margin:0;align-self:flex-start;background:var(--paper);padding:1vw 1vw 4.4vw;border-radius:.4vw;transform:rotate(-2.2deg);box-shadow:0 2vw 4vw rgba(0,0,0,.5)}
 .cerceve .foto{width:36vw;height:50vh;overflow:hidden;background:#d9d4c7}
-.cerceve img{width:100%;height:100%;object-fit:cover;animation:kenburns 16s ease-out both}
+.cerceve img,.cerceve video{width:100%;height:100%;object-fit:cover;display:block}
+.cerceve img{animation:kenburns 16s ease-out both}
 @keyframes kenburns{from{transform:scale(1.18) translate(2%,1%)}to{transform:scale(1) translate(0,0)}}
 .cerceve figcaption{position:absolute;left:1vw;right:1vw;bottom:1.1vw;color:#23302f;font:800 1.75vw/1.1 var(--disp);text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .bant{position:absolute;top:-1.3vw;left:50%;width:9vw;height:2.6vw;background:rgba(255,210,74,.78);transform:translateX(-50%) rotate(3deg);box-shadow:0 .2vw .5vw rgba(0,0,0,.15)}
@@ -123,6 +124,7 @@ h1.dev{font:800 5.6vw/1 var(--disp);margin:0;color:var(--ink);text-wrap:balance;
 /* düşen fotoğraflar */
 .polar{position:absolute;top:0;left:0;width:11.5vw;background:var(--paper);padding:.55vw .55vw 2.2vw;border-radius:.3vw;box-shadow:0 1.2vw 2.6vw rgba(0,0,0,.45);will-change:transform,opacity}
 .polar img{display:block;width:100%;aspect-ratio:1;object-fit:cover;background:#ddd}
+.polar.vid::after{content:'▶';position:absolute;left:50%;top:42%;transform:translate(-50%,-50%);width:3vw;height:3vw;border-radius:50%;background:rgba(0,0,0,.55);color:#fff;display:grid;place-items:center;font-size:1.2vw;padding-left:.2vw}
 .polar span{position:absolute;left:.5vw;right:.5vw;bottom:.5vw;text-align:center;font:800 .95vw/1.1 var(--disp);color:#2a3433;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .kabarcik{position:absolute;top:0;left:0;width:7vw;height:7vw;border-radius:50%;display:grid;place-items:center;font:800 3.2vw/1 var(--disp);color:var(--ink);
   background:radial-gradient(circle at 30% 28%, rgba(255,255,255,.4), rgba(255,255,255,.06) 62%);border:1px solid rgba(255,255,255,.32);will-change:transform,opacity}
@@ -187,9 +189,16 @@ body.panel-modu #panelKatman{position:static;display:block;background:radial-gra
 .pn-thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .pn-thumb{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:#000}
 .pn-thumb img{width:100%;height:100%;object-fit:cover}
+.pn-thumb .oynat{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:30px;height:30px;border-radius:50%;background:rgba(0,0,0,.6);display:grid;place-items:center;font-size:12px;pointer-events:none}
 .pn-thumb .rozet{position:absolute;left:4px;top:4px;background:var(--sun);color:#2a1d00;font:800 10px var(--disp);padding:2px 6px;border-radius:99px}
 .pn-thumb button{position:absolute;right:4px;top:4px;min-height:0;width:30px;height:30px;padding:0;border-radius:50%;background:rgba(0,0,0,.65);font-size:14px}
 .pn-bos{opacity:.7;font-size:14px;grid-column:1/-1;margin:0}
+.pn-okullar{display:flex;flex-wrap:wrap;gap:8px}
+.pn-okul{display:flex;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.18)}
+.pn .pn-okul button{border:0;border-radius:0;background:rgba(255,255,255,.08)}
+.pn .pn-okul button.sil{min-width:40px;padding:0 10px;background:rgba(0,0,0,.25);font-size:14px}
+.pn .pn-okul.secili button{background:var(--sun);color:#2a1d00}
+.pn .pn-okul.secili button.sil{background:rgba(0,0,0,.15)}
 .pn-kucuk{font-size:13px;opacity:.75;line-height:1.5;margin:8px 0 0}
 .pn-kucuk code{background:rgba(0,0,0,.3);padding:1px 5px;border-radius:5px;word-break:break-all}
 .pn details summary{cursor:pointer;font:800 15px var(--disp);padding:4px 0}
@@ -270,9 +279,10 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const qs = new URLSearchParams(location.search);
 const ODA = (qs.get('oda') || AYAR.ODA).replace(/[^\w-]/g,'').slice(0,40) || 'bilisim-sinifi';
+const URL_OKUL = (qs.get('okul') || '').trim().slice(0,40);
 const PANEL_MODU = qs.has('panel') || location.hash === '#panel';
 const AZ_HAREKET = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const VARSAYILAN = { sinif:'genel', tema:'selale', ogretmenAdi:'Barış Öğretmen', okulAdi:'Değişim Koleji',
+const VARSAYILAN = { sinif:'genel', tema:'selale', ogretmenAdi:'Barış Öğretmen', okulAdi:'Değişim Koleji', okullar:['Değişim Koleji'],
   duyuru:'', duyuruBitis:0, sessiz:false, olay:null };
 function yeniId(){ return (crypto.randomUUID ? crypto.randomUUID() : Date.now().toString(36)+Math.random().toString(36).slice(2)); }
 function tost(m){ const t=$('#tost'); t.textContent=m; t.classList.add('acik'); clearTimeout(tost._z); tost._z=setTimeout(()=>t.classList.remove('acik'),2800); }
@@ -344,18 +354,82 @@ const Store = {
     const k = {id:yeniId(), oda:ODA, ...o}; await idbPut(k);
     this.fotolar = await idbTum(); this.kanal && this.kanal.postMessage('foto'); this.emit('foto');
   },
+  // Video: Firestore'da 900 KB'lık parçalar halinde (Storage / ücretli plan gerekmez)
+  async addVideo(file, meta, ilerle){
+    if(this.bulut){
+      const id = yeniId(), doc = this.fotoRef.doc(id), buf = new Uint8Array(await file.arrayBuffer()), P = 900000, n = Math.ceil(buf.length/P);
+      for(let i=0;i<n;i++){
+        await doc.collection('parca').doc(String(i).padStart(4,'0')).set({ d: firebase.firestore.Blob.fromUint8Array(buf.subarray(i*P,(i+1)*P)) });
+        ilerle && ilerle((i+1)/n);
+      }
+      return doc.set({ ...meta, video:{ parca:n, tip:file.type || 'video/mp4', boyut:buf.length } });
+    }
+    const k = { id:yeniId(), oda:ODA, ...meta, video:{ parca:1, tip:file.type || 'video/mp4', boyut:file.size }, videoBlob:file };
+    await idbPut(k); ilerle && ilerle(1);
+    this.fotolar = await idbTum(); this.kanal && this.kanal.postMessage('foto'); this.emit('foto');
+  },
   async delFoto(id){
-    if(this.bulut) return this.fotoRef.doc(id).delete();
+    if(this.bulut){
+      const f = this.fotolar.find(x => x.id === id);
+      if(f && f.video){ const q = await this.fotoRef.doc(id).collection('parca').get(); await Promise.all(q.docs.map(d => d.ref.delete())); }
+      return this.fotoRef.doc(id).delete();
+    }
     await idbDel(id); this.fotolar = await idbTum(); this.kanal && this.kanal.postMessage('foto'); this.emit('foto');
   }
 };
 let _db=null;
-function idbAc(){ if(_db) return Promise.resolve(_db); return new Promise((res,rej)=>{ const r=indexedDB.open('bilisim_tahta',1);
-  r.onupgradeneeded=()=>r.result.createObjectStore('fotolar',{keyPath:'id'}); r.onsuccess=()=>{_db=r.result;res(_db);}; r.onerror=()=>rej(r.error); }); }
+function idbAc(){ if(_db) return Promise.resolve(_db); return new Promise((res,rej)=>{ const r=indexedDB.open('bilisim_tahta',2);
+  r.onupgradeneeded=()=>{ const d=r.result; if(!d.objectStoreNames.contains('fotolar')) d.createObjectStore('fotolar',{keyPath:'id'}); if(!d.objectStoreNames.contains('onbellek')) d.createObjectStore('onbellek'); }; r.onsuccess=()=>{_db=r.result;res(_db);}; r.onerror=()=>rej(r.error); }); }
 async function idbTum(){ try{ const db=await idbAc(); return await new Promise(res=>{ const q=db.transaction('fotolar').objectStore('fotolar').getAll();
   q.onsuccess=()=>res(q.result.filter(x=>x.oda===ODA).sort((a,b)=>b.t-a.t)); q.onerror=()=>res([]); }); }catch(e){ return []; } }
 async function idbPut(o){ const db=await idbAc(); return new Promise((res,rej)=>{ const tx=db.transaction('fotolar','readwrite'); tx.objectStore('fotolar').put(o); tx.oncomplete=res; tx.onerror=()=>rej(tx.error); }); }
+async function onbellekAl(id){ try{ const db=await idbAc(); return await new Promise(res=>{ const q=db.transaction('onbellek').objectStore('onbellek').get(id); q.onsuccess=()=>res(q.result||null); q.onerror=()=>res(null); }); }catch(e){ return null; } }
+async function onbellekKoy(id,blob){ try{ const db=await idbAc(); db.transaction('onbellek','readwrite').objectStore('onbellek').put(blob,id); }catch(e){} }
+async function onbellekBuda(tutulacak){ try{ const db=await idbAc(); const st=db.transaction('onbellek','readwrite').objectStore('onbellek'); const q=st.getAllKeys(); q.onsuccess=()=>q.result.forEach(k=>{ if(!tutulacak.has(k)) st.delete(k); }); }catch(e){} }
 async function idbDel(id){ const db=await idbAc(); return new Promise((res,rej)=>{ const tx=db.transaction('fotolar','readwrite'); tx.objectStore('fotolar').delete(id); tx.oncomplete=res; tx.onerror=()=>rej(tx.error); }); }
+
+/* ============ MEDYA (fotoğraf + video) ============ */
+const Medya = {
+  url:{}, bekle:{},
+  async getir(f){
+    if(!f || !f.video || this.url[f.id] || this.bekle[f.id]) return;
+    this.bekle[f.id] = 1;
+    try{
+      let blob = f.videoBlob || await onbellekAl(f.id);
+      if(!blob && Store.bulut){
+        const q = await Store.fotoRef.doc(f.id).collection('parca').get();
+        const parcalar = q.docs.sort((a,b) => a.id < b.id ? -1 : 1).map(d => d.data().d.toUint8Array());
+        if(parcalar.length === f.video.parca){ blob = new Blob(parcalar, { type:f.video.tip || 'video/mp4' }); onbellekKoy(f.id, blob); }
+      }
+      if(blob){ this.url[f.id] = URL.createObjectURL(blob); this.yukselt(f.id); }
+    }catch(e){ console.warn('Video alınamadı', e); }
+    finally{ delete this.bekle[f.id]; }
+  },
+  yukselt(id){
+    document.querySelectorAll('img[data-vid]').forEach(img => { if(img.dataset.vid === id) img.replaceWith(videoEl(this.url[id], img.getAttribute('src'))); });
+  }
+};
+function videoEl(src, poster){
+  const v = document.createElement('video'); v.muted = true; v.defaultMuted = true; v.loop = true; v.autoplay = true; v.playsInline = true;
+  v.setAttribute('playsinline',''); v.setAttribute('muted',''); if(poster) v.poster = poster; v.src = src;
+  v.play && v.play().catch(()=>{}); return v;
+}
+function medyaHTML(f){
+  if(f.video){
+    const u = Medya.url[f.id];
+    if(u) return `<video src="${u}" poster="${f.veri}" muted autoplay loop playsinline></video>`;
+    Medya.getir(f); return `<img src="${f.veri}" data-vid="${esc(f.id)}" alt="">`;
+  }
+  return `<img src="${f.veri}" alt="">`;
+}
+// video oynatılamazsa (örn. tahta bilgisayarı HEVC açamıyorsa) kapak resmine dön
+document.addEventListener('error', e => {
+  const v = e.target; if(v && v.tagName === 'VIDEO' && v.poster){ const i = document.createElement('img'); i.src = v.poster; i.alt = ''; v.replaceWith(i); }
+}, true);
+// inner HTML ile eklenen videoları sessizce başlat
+new MutationObserver(m => m.forEach(x => x.addedNodes.forEach(n => {
+  if(n.querySelectorAll) n.querySelectorAll('video').forEach(v => { v.muted = true; v.play && v.play().catch(()=>{}); });
+}))).observe(document.documentElement, { childList:true, subtree:true });
 
 /* ============ İÇERİK — sınıf düzeyine göre ============ */
 const SINIFLAR = ['genel','anaokulu','1','2','3','4','5','6','7','8'];
@@ -621,7 +695,7 @@ function harfle(metin){
 function el(html){ const d = document.createElement('section'); d.innerHTML = html; return d; }
 function avatarHTML(){
   const f = ogretmenFoto();
-  return `<div class="avatar"><div class="ic">${f ? `<img src="${f.veri}" alt="">` : '👨‍🏫'}</div></div>`;
+  return `<div class="avatar"><div class="ic">${f ? medyaHTML(f) : '👨‍🏫'}</div></div>`;
 }
 
 const SAHNELER = {
@@ -652,9 +726,11 @@ const SAHNELER = {
   galeri(){
     const f = sinifFotolari(); if(!f.length) return SAHNELER.gorev();
     const p = f[(_sayac.gal = (_sayac.gal ?? -1) + 1) % f.length];
-    return el(`
-      <figure class="cerceve"><div class="bant"></div><div class="foto"><img src="${p.veri}" alt=""></div>
-      <figcaption>${esc(p.not || 'Sınıfımızdan 📸')}</figcaption></figure>`);
+    const d = el(`
+      <figure class="cerceve"><div class="bant"></div><div class="foto">${medyaHTML(p)}</div>
+      <figcaption>${esc(p.not || (p.video ? 'Sınıfımızdan 🎬' : 'Sınıfımızdan 📸'))}</figcaption></figure>`);
+    if(p.video) d.dataset.sure = 22000;
+    return d;
   },
   dongu(){
     const d = el(`
@@ -689,12 +765,14 @@ function sahneGoster(ad){
   const kap = $('#sahne');
   kap.querySelectorAll('.scene').forEach(o => { o.classList.add('cikis'); setTimeout(() => o.remove(), 650); });
   const yeni = SAHNELER[ad](); yeni.classList.add('scene'); kap.appendChild(yeni);
-  const b = $('#ilerleme'); b.style.animation = 'none'; void b.offsetWidth; b.style.animation = `dol ${SURE[ad]}ms linear forwards`;
+  const sure = +yeni.dataset.sure || SURE[ad];
+  const b = $('#ilerleme'); b.style.animation = 'none'; void b.offsetWidth; b.style.animation = `dol ${sure}ms linear forwards`;
+  return sure;
 }
 function sonrakiSahne(){
   if(siraI >= sira.length){ sira = oynatmaListesi(); siraI = 0; }
-  const ad = sira[siraI++]; sahneGoster(ad);
-  clearTimeout(sahneZ); sahneZ = setTimeout(sonrakiSahne, SURE[ad]);
+  const ad = sira[siraI++]; const sure = sahneGoster(ad);
+  clearTimeout(sahneZ); sahneZ = setTimeout(sonrakiSahne, sure);
 }
 function bastan(){ sira = []; siraI = 0; sonrakiSahne(); }
 
@@ -715,7 +793,7 @@ function dusur(){
   setTimeout(dusur, 6500 + Math.random()*3500);
   if(document.hidden || S.sessiz || dusen >= 3) return;
   const kat = $('#fotoKatman'); const f = sinifFotolari(); let e;
-  if(f.length){ const p = f[dusenSira++ % f.length]; e = document.createElement('div'); e.className = 'polar';
+  if(f.length){ const p = f[dusenSira++ % f.length]; e = document.createElement('div'); e.className = 'polar' + (p.video ? ' vid' : '');
     e.innerHTML = `<img src="${p.veri}" alt=""><span>${esc(p.not || '')}</span>`; }
   else { e = document.createElement('div'); e.className = 'kabarcik'; e.textContent = KABARCIK[(Math.random()*KABARCIK.length)|0]; }
   kat.appendChild(e); dusen++;
@@ -741,11 +819,11 @@ function yeniFotoKontrol(){
   bilinenler = ids;
   if(!yeni.length || PANEL_MODU) return;
   const p = yeni[0]; const k = $('#yeniFotoKatman');
-  k.innerHTML = `<div class="katman-ic"><h2>Yeni fotoğraf geldi! 📸</h2>
-    <figure class="cerceve"><div class="bant"></div><div class="foto"><img src="${p.veri}" alt=""></div><figcaption>${esc(p.not || 'Sınıfımızdan')}</figcaption></figure>
+  k.innerHTML = `<div class="katman-ic"><h2>${p.video ? 'Yeni video geldi! 🎬' : 'Yeni fotoğraf geldi! 📸'}</h2>
+    <figure class="cerceve"><div class="bant"></div><div class="foto">${medyaHTML(p)}</div><figcaption>${esc(p.not || 'Sınıfımızdan')}</figcaption></figure>
     ${yeni.length > 1 ? `<p>+${yeni.length-1} fotoğraf daha şelaleye katıldı</p>` : ''}</div>`;
   k.classList.add('acik'); Selale.konfeti(170);
-  clearTimeout(patlamaZ); patlamaZ = setTimeout(() => k.classList.remove('acik'), 7500);
+  clearTimeout(patlamaZ); patlamaZ = setTimeout(() => k.classList.remove('acik'), p.video ? 12000 : 7500);
 }
 
 /* anlık gösteriler */
@@ -792,7 +870,7 @@ function durumUygula(yeni){
     document.documentElement.dataset.tema = ['selale','gunbatimi','uzay'].includes(S.tema) ? S.tema : 'selale';
     document.documentElement.dataset.temaKuruldu = '1'; Selale.renk();
   }
-  $('#okulYazi').textContent = S.okulAdi || '';
+  $('#okulYazi').textContent = URL_OKUL || S.okulAdi || '';
   $('#sinifCip').textContent = sinifAd(S.sinif);
   pinGuncelle();
   if(once.sessiz !== S.sessiz) sessizUygula(!!S.sessiz);
@@ -813,6 +891,27 @@ async function sikistir(file, max, q){
     while(d.length > 800000 && q > .35){ q -= .1; d = c.toDataURL('image/jpeg', q); }
     return d;
   } finally { URL.revokeObjectURL(url); }
+}
+const VIDEO_MB = 40, VIDEO_ADET = 8;
+function videoMu(f){ return (f.type || '').startsWith('video/') || /\.(mp4|mov|m4v|webm|3gp)$/i.test(f.name || ''); }
+function videoKontrol(f){ if(f.size > VIDEO_MB*1024*1024){ const e = new Error(`Video çok büyük (${Math.round(f.size/1048576)} MB). En fazla ${VIDEO_MB} MB; telefonda kırpıp tekrar dene.`); e.kullanici = true; throw e; } }
+async function videoKapak(file){
+  const yedek = () => { const c = document.createElement('canvas'); c.width = 800; c.height = 600; const x = c.getContext('2d');
+    const g = x.createLinearGradient(0,0,800,600); g.addColorStop(0,'#0B3A47'); g.addColorStop(1,'#5FE3E0'); x.fillStyle = g; x.fillRect(0,0,800,600);
+    x.fillStyle = 'rgba(255,255,255,.9)'; x.beginPath(); x.moveTo(350,220); x.lineTo(350,380); x.lineTo(480,300); x.closePath(); x.fill(); return c.toDataURL('image/jpeg',.8); };
+  const url = URL.createObjectURL(file);
+  try{
+    const v = document.createElement('video'); v.muted = true; v.playsInline = true; v.setAttribute('playsinline',''); v.preload = 'auto'; v.src = url;
+    v.play().catch(()=>{});
+    await new Promise((res, rej) => { v.onloadeddata = res; v.onerror = rej; setTimeout(rej, 12000); });
+    v.pause(); v.currentTime = Math.min(1, (v.duration || 0)/3);
+    await new Promise(res => { v.onseeked = res; setTimeout(res, 3000); });
+    if(!v.videoWidth) return yedek();
+    const o = Math.min(1, 900/Math.max(v.videoWidth, v.videoHeight)); const c = document.createElement('canvas');
+    c.width = Math.round(v.videoWidth*o); c.height = Math.round(v.videoHeight*o); c.getContext('2d').drawImage(v, 0, 0, c.width, c.height);
+    return c.toDataURL('image/jpeg', .75);
+  } catch(e){ return yedek(); }
+  finally{ URL.revokeObjectURL(url); }
 }
 function hataMetni(e){
   const k = (e && (e.code || e.message)) || '';
@@ -851,15 +950,22 @@ function panelKur(kok, tamSayfa){
     <header><div class="pn-logo">📡</div><div><h2>Tahta kumandası</h2><p id="pnDurum">Bağlanıyor…</p></div>
       ${tamSayfa ? '' : '<button class="pn-kapat" id="pnKapat" aria-label="Kapat">✕</button>'}</header>
 
+    <section><h3>Hangi okuldayım? <small>tahtada logonun altında yazar</small></h3>
+      <div class="pn-okullar" id="pnOkullar"></div>
+      <div class="pn-row" style="margin-top:10px"><input type="text" id="pnOkulYeni" maxlength="40" placeholder="Yeni okul adı yaz" style="margin:0;flex:3 1 0">
+        <button class="birincil" id="pnOkulEkle" style="flex:1 1 0">Ekle</button></div>
+    </section>
+
     <section><h3>Şu an hangi sınıf derste?</h3><div class="pn-grid" id="pnSinif">
       ${SINIFLAR.map(s => `<button data-s="${s}" class="${s==='genel'||s==='anaokulu' ? 'genis' : ''}" style="${s==='anaokulu' ? 'grid-column:span 5' : ''}">${s==='genel' ? '🚀 Genel (tüm okul)' : s==='anaokulu' ? '🐣 Anaokulu' : s+'.'}</button>`).join('')}
     </div></section>
 
-    <section><h3>Fotoğraf gönder</h3>
+    <section><h3>Fotoğraf ve video gönder</h3>
       <label class="alan" for="pnNot">Fotoğraf altı yazısı (isteğe bağlı)</label>
       <input type="text" id="pnNot" maxlength="40" placeholder="Örn. 3-A robot yarışı 🏆">
-      <label class="pn-btn buyuk-btn">📸 Sınıf fotoğrafı ekle<input type="file" accept="image/*" multiple hidden id="pnFoto"></label>
-      <div class="pn-row" style="margin-top:8px"><label class="pn-btn">🙂 Öğretmen fotoğrafımı değiştir<input type="file" accept="image/*" hidden id="pnOgr"></label></div>
+      <label class="pn-btn buyuk-btn">📸 Fotoğraf veya 🎬 video ekle<input type="file" accept="image/*,video/*" multiple hidden id="pnFoto"></label>
+      <div class="pn-row" style="margin-top:8px"><label class="pn-btn">🙂 Öğretmen kartım: fotoğraf ya da video<input type="file" accept="image/*,video/*" hidden id="pnOgr"></label></div>
+      <p class="pn-kucuk">Video en fazla ${VIDEO_MB} MB olabilir; 10–30 saniyelik kısa videolar en iyisidir. Tahtada sessiz ve döngüde oynar.</p>
       <div class="pn-yuk" id="pnYuk"></div>
     </section>
 
@@ -878,12 +984,11 @@ function panelKur(kok, tamSayfa){
     <section><h3>Görünüm</h3>
       <div class="pn-row" id="pnTema" style="margin-bottom:12px"><button data-t="selale">🌊 Şelale</button><button data-t="gunbatimi">🌅 Gün batımı</button><button data-t="uzay">🌌 Uzay</button></div>
       <label class="alan" for="pnAd">Tahtada görünen adın</label><input type="text" id="pnAd" maxlength="30">
-      <label class="alan" for="pnOkul">Logonun altındaki yazı</label><input type="text" id="pnOkul" maxlength="40">
       <button id="pnKaydet" style="width:100%">Kaydet</button>
     </section>
 
     <section><h3>Tahtadaki fotoğraflar <small id="pnSay"></small></h3><div class="pn-thumbs" id="pnThumbs"></div>
-      <p class="pn-kucuk">En fazla 48 sınıf fotoğrafı tutulur; yenisi gelince en eskisi kendiliğinden silinir.</p></section>
+      <p class="pn-kucuk">En fazla 48 fotoğraf ve ${VIDEO_ADET} video tutulur; yenisi gelince en eskisi kendiliğinden silinir.</p></section>
 
     <section><details><summary>Kurulum ve bağlantılar</summary>
       <p class="pn-kucuk">Oda: <code>${esc(ODA)}</code></p>
@@ -912,32 +1017,63 @@ function panelKur(kok, tamSayfa){
     gonder({ duyuru:v, duyuruBitis: dk ? Date.now() + dk*60000 : 0 }, 'Not tahtada 📌'); };
   $('#pnDuyuruKaldir').onclick = () => { $('#pnDuyuru').value = ''; gonder({ duyuru:'', duyuruBitis:0 }, 'Not kaldırıldı'); };
   $('#pnTema').onclick = e => { const b = e.target.closest('button'); if(b) gonder({ tema:b.dataset.t }, 'Tema değişti'); };
-  $('#pnKaydet').onclick = () => gonder({ ogretmenAdi:$('#pnAd').value.trim() || VARSAYILAN.ogretmenAdi, okulAdi:$('#pnOkul').value.trim() }, 'Kaydedildi');
+  $('#pnKaydet').onclick = () => gonder({ ogretmenAdi:$('#pnAd').value.trim() || VARSAYILAN.ogretmenAdi, }, 'Kaydedildi');
+  const okulListesi = () => { const l = Array.isArray(Store.state.okullar) ? [...Store.state.okullar] : []; if(Store.state.okulAdi && !l.includes(Store.state.okulAdi)) l.unshift(Store.state.okulAdi); return l; };
+  const okulEkle = () => { const v = $('#pnOkulYeni').value.trim(); if(!v) return tost('Önce okul adını yaz');
+    const l = okulListesi(); if(!l.includes(v)) l.push(v); $('#pnOkulYeni').value = '';
+    gonder({ okullar:l, okulAdi:v }, `Tahtada: ${v}`); };
+  $('#pnOkulEkle').onclick = okulEkle;
+  $('#pnOkulYeni').onkeydown = e => { if(e.key === 'Enter') okulEkle(); };
+  $('#pnOkullar').onclick = e => {
+    const sil = e.target.closest('[data-okul-sil]');
+    if(sil){ const ad = sil.dataset.okulSil; if(!confirm(`"${ad}" listeden silinsin mi?`)) return;
+      const l = okulListesi().filter(x => x !== ad);
+      return gonder({ okullar:l, okulAdi: Store.state.okulAdi === ad ? '' : Store.state.okulAdi }, 'Okul silindi'); }
+    const b = e.target.closest('[data-okul]'); if(!b) return;
+    gonder({ okulAdi:b.dataset.okul }, b.dataset.okul ? `Tahtada: ${b.dataset.okul}` : 'Okul adı gizlendi');
+  };
 
   const yukDurum = (m, oran) => { $('#pnYuk').innerHTML = m ? `${esc(m)}${oran!=null ? `<div class="pn-cubuk"><i style="width:${oran*100}%"></i></div>` : ''}` : ''; };
   $('#pnFoto').onchange = async e => {
     const dosyalar = [...e.target.files]; e.target.value = ''; if(!dosyalar.length) return;
     const not = $('#pnNot').value.trim(); let ok = 0;
     for(let i=0;i<dosyalar.length;i++){
-      yukDurum(`${i+1}/${dosyalar.length} hazırlanıyor…`, i/dosyalar.length);
-      try{ const veri = await sikistir(dosyalar[i], 1400, .76); await Store.addFoto({ veri, tur:'sinif', not, t:Date.now() + i }); ok++; }
-      catch(err){ tost(hataMetni(err)); }
+      const f = dosyalar[i];
+      try{
+        if(videoMu(f)){
+          videoKontrol(f);
+          yukDurum(`${i+1}/${dosyalar.length} video hazırlanıyor…`, i/dosyalar.length);
+          const veri = await videoKapak(f);
+          await Store.addVideo(f, { veri, tur:'sinif', not, t:Date.now() + i }, o => yukDurum(`${i+1}/${dosyalar.length} video gönderiliyor… %${Math.round(o*100)}`, (i+o)/dosyalar.length));
+        } else {
+          yukDurum(`${i+1}/${dosyalar.length} hazırlanıyor…`, i/dosyalar.length);
+          const veri = await sikistir(f, 1400, .76); await Store.addFoto({ veri, tur:'sinif', not, t:Date.now() + i });
+        }
+        ok++;
+      } catch(err){ tost(err.kullanici ? err.message : hataMetni(err)); }
     }
-    yukDurum(ok ? `${ok} fotoğraf tahtaya gönderildi ✅` : '', ok ? 1 : null); $('#pnNot').value = '';
+    yukDurum(ok ? `${ok} dosya tahtaya gönderildi ✅` : '', ok ? 1 : null); $('#pnNot').value = '';
     setTimeout(() => yukDurum(''), 4000);
-    const fazla = Store.fotolar.filter(f => f.tur !== 'ogretmen').sort((a,b) => b.t - a.t).slice(48);
+    const sinifF = Store.fotolar.filter(f => f.tur !== 'ogretmen').sort((a,b) => b.t - a.t);
+    const fazla = [...sinifF.filter(f => !f.video).slice(48), ...sinifF.filter(f => f.video).slice(VIDEO_ADET)];
     for(const f of fazla){ try{ await Store.delFoto(f.id); }catch(e){} }
   };
   $('#pnOgr').onchange = async e => {
     const f = e.target.files[0]; e.target.value = ''; if(!f) return;
-    yukDurum('Öğretmen fotoğrafı hazırlanıyor…', .3);
     try{
-      const veri = await sikistir(f, 640, .82);
       const eskiler = Store.fotolar.filter(x => x.tur === 'ogretmen');
-      await Store.addFoto({ veri, tur:'ogretmen', not:'', t:Date.now() });
+      if(videoMu(f)){
+        videoKontrol(f); yukDurum('Öğretmen videosu hazırlanıyor…', .1);
+        const veri = await videoKapak(f);
+        await Store.addVideo(f, { veri, tur:'ogretmen', not:'', t:Date.now() }, o => yukDurum(`Öğretmen videosu gönderiliyor… %${Math.round(o*100)}`, o));
+      } else {
+        yukDurum('Öğretmen fotoğrafı hazırlanıyor…', .3);
+        const veri = await sikistir(f, 640, .82);
+        await Store.addFoto({ veri, tur:'ogretmen', not:'', t:Date.now() });
+      }
       for(const x of eskiler){ try{ await Store.delFoto(x.id); }catch(_){} }
-      yukDurum('Öğretmen fotoğrafın güncellendi ✅', 1); setTimeout(() => yukDurum(''), 3000);
-    }catch(err){ yukDurum(''); tost(hataMetni(err)); }
+      yukDurum('Öğretmen kartın güncellendi ✅', 1); setTimeout(() => yukDurum(''), 3000);
+    }catch(err){ yukDurum(''); tost(err.kullanici ? err.message : hataMetni(err)); }
   };
 
   Store.on('state', s => {
@@ -945,18 +1081,21 @@ function panelKur(kok, tamSayfa){
     kok.querySelectorAll('#pnTema button').forEach(b => b.classList.toggle('secili', b.dataset.t === s.tema));
     $('#pnSessiz').classList.toggle('secili', !!s.sessiz);
     if(document.activeElement !== $('#pnAd')) $('#pnAd').value = s.ogretmenAdi || '';
-    if(document.activeElement !== $('#pnOkul')) $('#pnOkul').value = s.okulAdi || '';
+    const ol = Array.isArray(s.okullar) ? [...s.okullar] : []; if(s.okulAdi && !ol.includes(s.okulAdi)) ol.unshift(s.okulAdi);
+    $('#pnOkullar').innerHTML = ol.map(o => `<div class="pn-okul ${o===s.okulAdi ? 'secili' : ''}"><button data-okul="${esc(o)}">🏫 ${esc(o)}</button><button class="sil" data-okul-sil="${esc(o)}" aria-label="${esc(o)} sil">✕</button></div>`).join('')
+      + `<div class="pn-okul ${!s.okulAdi ? 'secili' : ''}"><button data-okul="">🙈 Okul adını gizle</button></div>`;
     if(document.activeElement !== $('#pnDuyuru') && duyuruAktifS(s)) $('#pnDuyuru').value = s.duyuru;
     document.documentElement.dataset.tema = s.tema || 'selale';
     durum();
   });
   Store.on('foto', fl => {
     const sinifF = fl.filter(f => f.tur !== 'ogretmen');
-    $('#pnSay').textContent = `${sinifF.length} sınıf fotoğrafı`;
-    $('#pnThumbs').innerHTML = fl.length ? fl.map(f => `<div class="pn-thumb"><img src="${f.veri}" alt="">${f.tur==='ogretmen' ? '<span class="rozet">Öğretmen</span>' : ''}<button data-sil="${esc(f.id)}" aria-label="Fotoğrafı sil">🗑️</button></div>`).join('')
+    const vs = sinifF.filter(f => f.video).length;
+    $('#pnSay').textContent = `${sinifF.length - vs} fotoğraf · ${vs} video`;
+    $('#pnThumbs').innerHTML = fl.length ? fl.map(f => `<div class="pn-thumb"><img src="${f.veri}" alt="">${f.video ? '<span class="oynat">▶</span>' : ''}${f.tur==='ogretmen' ? '<span class="rozet">Öğretmen</span>' : ''}<button data-sil="${esc(f.id)}" aria-label="Fotoğrafı sil">🗑️</button></div>`).join('')
       : '<p class="pn-bos">Henüz fotoğraf yok. İlk fotoğrafı gönder, tahtada konfetiyle karşılansın!</p>';
   });
-  $('#pnThumbs').onclick = async e => { const b = e.target.closest('[data-sil]'); if(!b) return; if(!confirm('Bu fotoğraf tahtadan silinsin mi?')) return;
+  $('#pnThumbs').onclick = async e => { const b = e.target.closest('[data-sil]'); if(!b) return; if(!confirm('Bu dosya tahtadan silinsin mi?')) return;
     try{ await Store.delFoto(b.dataset.sil); tost('Silindi'); }catch(err){ tost(hataMetni(err)); } };
 }
 function duyuruAktifS(s){ return !!(s.duyuru && (!s.duyuruBitis || Date.now() < s.duyuruBitis)); }
@@ -983,7 +1122,11 @@ function duyuruAktifS(s){ return !!(s.duyuru && (!s.duyuruBitis || Date.now() < 
 
   await Store.init();
   Store.on('state', s => durumUygula(s));
-  Store.on('foto', fl => { tumFotolar = fl; yeniFotoKontrol(); });
+  Store.on('foto', fl => {
+    tumFotolar = fl; yeniFotoKontrol();
+    fl.filter(f => f.video).forEach(f => Medya.getir(f));             // videoları arka planda hazırla
+    onbellekBuda(new Set(fl.filter(f => f.video).map(f => f.id)));    // silinenlerin önbelleğini temizle
+  });
   bastan();
 })();
 </script>
