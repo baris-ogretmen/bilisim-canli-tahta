@@ -54,6 +54,27 @@ body{overflow:hidden}
 .saat small{display:block;font:700 1.02vw/1.3 var(--govde);opacity:.78;margin-top:.6vh}
 .saat .sinif-cip{display:inline-block;margin-top:1vh;padding:.45vh .9vw;border-radius:99px;background:var(--sun);color:#2a1d00;font:800 1vw/1.3 var(--disp)}
 
+/* dokunarak düzenlenen isimler */
+.duzenlenir{cursor:pointer;border-radius:.5vw;padding:.15vh .4vw;margin:-.15vh -.4vw;transition:background .2s}
+.duzenlenir:hover,.duzenlenir:active{background:rgba(255,255,255,.12)}
+.duzenlenir::after{content:' ✏️';font-size:.8em;opacity:.55}
+#duzenle{position:fixed;inset:0;z-index:150;display:none;place-items:center;background:rgba(2,8,10,.72);padding:16px}
+#duzenle.acik{display:grid}
+.dz-kutu{width:min(640px,100%);background:var(--bg1);border:1px solid rgba(255,255,255,.2);border-radius:22px;padding:clamp(18px,2.4vw,32px);box-shadow:0 30px 80px rgba(0,0,0,.6)}
+.dz-kutu h2{font:800 clamp(22px,2.2vw,34px)/1.1 var(--disp);margin:0 0 6px}
+.dz-kutu p{font:700 clamp(14px,1.1vw,18px)/1.4 var(--govde);opacity:.75;margin:0 0 16px}
+.dz-kutu input{width:100%;font:800 clamp(20px,1.9vw,30px) var(--disp);color:var(--ink);background:rgba(0,0,0,.3);border:2px solid var(--sun);border-radius:14px;padding:14px 16px;outline:none}
+.dz-cipler{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
+.dz-cip{display:flex;border-radius:12px;overflow:hidden;border:1px solid rgba(255,255,255,.2)}
+.dz-cip button{font:800 clamp(15px,1.25vw,20px)/1.2 var(--disp);color:var(--ink);background:rgba(255,255,255,.08);border:0;padding:12px 14px;cursor:pointer;min-height:48px}
+.dz-cip.secili button{background:var(--sun);color:#2a1d00}
+.dz-cip button.sil{background:rgba(0,0,0,.25);min-width:44px}
+.dz-butonlar{display:flex;gap:10px;margin-top:20px}
+.dz-butonlar button{flex:1;font:800 clamp(17px,1.5vw,24px)/1 var(--disp);border-radius:14px;padding:18px;cursor:pointer;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:var(--ink)}
+.dz-butonlar .tamam{background:var(--sun);color:#2a1d00;border-color:var(--sun)}
+.pn-uyari{background:rgba(255,122,107,.16);border:1px solid rgba(255,122,107,.6);border-radius:14px;padding:12px 14px;font:700 14px/1.45 var(--govde);margin-bottom:12px}
+.pn-uyari b{font-family:var(--disp)}
+
 /* sahne */
 .sahne{position:absolute;left:calc(var(--L) + 3vw);top:16vh;width:45vw;bottom:calc(var(--B) + 8vh);z-index:4}
 .scene{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;gap:2.2vh;animation:sgir .9s cubic-bezier(.2,.8,.2,1) both}
@@ -225,7 +246,7 @@ body.panel-modu #panelKatman{position:static;display:block;background:radial-gra
     <div>
       <div class="marka">
         <div class="marka-ikon">&lt;/&gt;</div>
-        <div><b>Bilişim Sınıfı</b><small id="okulYazi">Değişim Koleji</small></div>
+        <div><b>Bilişim Sınıfı</b><small id="okulYazi" class="duzenlenir" role="button" tabindex="0" title="Okul adını değiştirmek için dokun">Değişim Koleji</small></div>
       </div>
       <div id="pin"><span>📌</span><span id="pinYazi"></span></div>
     </div>
@@ -252,6 +273,7 @@ body.panel-modu #panelKatman{position:static;display:block;background:radial-gra
   <button id="disli" title="Kumandayı aç" aria-label="Kumandayı aç">⚙️</button>
 </div>
 
+<div id="duzenle" role="dialog" aria-modal="true"></div>
 <div id="panelKatman"></div>
 <div class="tost" id="tost" role="status" aria-live="polite"></div>
 
@@ -706,7 +728,7 @@ const SAHNELER = {
       <div class="cip"><span class="em">${MASKOT[gr]}</span>${esc(sinifAd(S.sinif))}</div>
       <h1 class="dev" style="font-size:${fs}">${harfle(baslik)}</h1>
       <p class="lead">${esc(sec(ICERIK[gr].motive, gr+'m'))}</p>
-      <div class="ogretmen">${avatarHTML()}<div><b>${esc(S.ogretmenAdi)}</b><small>Bilişim sınıfı öğretmenin</small></div></div>`);
+      <div class="ogretmen">${avatarHTML()}<div><b class="duzenlenir" data-duzenle="ogretmen" role="button" tabindex="0">${esc(S.ogretmenAdi)}</b><small>Bilişim sınıfı öğretmenin</small></div></div>`);
   },
   gorev(){
     const gr = grup(S.sinif);
@@ -870,7 +892,7 @@ function durumUygula(yeni){
     document.documentElement.dataset.tema = ['selale','gunbatimi','uzay'].includes(S.tema) ? S.tema : 'selale';
     document.documentElement.dataset.temaKuruldu = '1'; Selale.renk();
   }
-  $('#okulYazi').textContent = URL_OKUL || S.okulAdi || '';
+  $('#okulYazi').textContent = URL_OKUL || S.okulAdi || 'Okul adı ekle';
   $('#sinifCip').textContent = sinifAd(S.sinif);
   pinGuncelle();
   if(once.sessiz !== S.sessiz) sessizUygula(!!S.sessiz);
@@ -878,6 +900,49 @@ function durumUygula(yeni){
   else if(S.duyuru && S.duyuru !== once.duyuru && duyuruAktif()){ sira = ['duyuru', ...oynatmaListesi()]; siraI = 0; sonrakiSahne(); }
   olayCalistir(S.olay);
 }
+
+/* ============ TAHTADA DOKUNARAK İSİM DEĞİŞTİRME ============ */
+function okullarListe(st){ const l = Array.isArray(st.okullar) ? [...st.okullar] : []; if(st.okulAdi && !l.includes(st.okulAdi)) l.unshift(st.okulAdi); return l; }
+function duzenleAc(alan){
+  const k = $('#duzenle'), okul = alan === 'okul';
+  const ciz = () => {
+    const st = Store.state, liste = okullarListe(st);
+    k.innerHTML = `<div class="dz-kutu">
+      <h2>${okul ? '🏫 Hangi okuldasın?' : '🙂 Tahtada görünen adın'}</h2>
+      <p>${okul ? 'Listeden okula dokun ya da yeni okulun adını yazıp Kaydet’e bas.' : 'Adını yaz ve Kaydet’e bas.'}</p>
+      <input type="text" id="dzGir" maxlength="40" autocomplete="off" placeholder="${okul ? 'Yeni okul adı' : 'Örn. Barış Öğretmen'}" value="${okul ? '' : esc(st.ogretmenAdi || '')}">
+      ${okul ? `<div class="dz-cipler">${liste.map(o => `<div class="dz-cip ${o===st.okulAdi ? 'secili' : ''}"><button data-sec="${esc(o)}">🏫 ${esc(o)}</button><button class="sil" data-sil="${esc(o)}" aria-label="${esc(o)} sil">✕</button></div>`).join('')}
+        <div class="dz-cip ${!st.okulAdi ? 'secili' : ''}"><button data-sec="">🙈 Okul adını gizle</button></div></div>` : ''}
+      <div class="dz-butonlar"><button id="dzVazgec">Vazgeç</button><button class="tamam" id="dzKaydet">Kaydet</button></div></div>`;
+    const gir = $('#dzGir');
+    const kaydet = async () => {
+      const v = gir.value.trim();
+      try{
+        if(okul){ if(!v) return tost('Okul adını yaz ya da listeden seç'); const l = okullarListe(Store.state); if(!l.includes(v)) l.push(v); await Store.setState({ okullar:l, okulAdi:v }); tost(`Tahtada: ${v}`); }
+        else { if(!v) return tost('Adını yaz'); await Store.setState({ ogretmenAdi:v }); tost('Adın güncellendi'); }
+        kapat();
+      }catch(e){ tost(hataMetni(e)); }
+    };
+    $('#dzKaydet').onclick = kaydet; $('#dzVazgec').onclick = kapat;
+    gir.onkeydown = e => { if(e.key === 'Enter') kaydet(); if(e.key === 'Escape') kapat(); };
+    k.querySelectorAll('[data-sec]').forEach(b => b.onclick = async () => { try{ await Store.setState({ okulAdi:b.dataset.sec }); tost(b.dataset.sec ? `Tahtada: ${b.dataset.sec}` : 'Okul adı gizlendi'); kapat(); }catch(e){ tost(hataMetni(e)); } });
+    k.querySelectorAll('[data-sil]').forEach(b => b.onclick = async () => { const ad = b.dataset.sil; if(!confirm(`"${ad}" listeden silinsin mi?`)) return;
+      try{ await Store.setState({ okullar: okullarListe(Store.state).filter(x => x !== ad), okulAdi: Store.state.okulAdi === ad ? '' : Store.state.okulAdi }); ciz(); }catch(e){ tost(hataMetni(e)); } });
+    setTimeout(() => gir.focus(), 60);
+  };
+  const kapat = () => { k.classList.remove('acik'); k.innerHTML = ''; };
+  k.onclick = e => { if(e.target === k) kapat(); };
+  ciz(); k.classList.add('acik');
+}
+document.addEventListener('click', e => {
+  if(e.target.closest('#okulYazi')) return duzenleAc('okul');
+  if(e.target.closest('[data-duzenle="ogretmen"]')) return duzenleAc('ogretmen');
+});
+document.addEventListener('keydown', e => {
+  if(e.key !== 'Enter') return;
+  if(e.target.id === 'okulYazi') duzenleAc('okul');
+  else if(e.target.dataset && e.target.dataset.duzenle === 'ogretmen') duzenleAc('ogretmen');
+});
 
 /* ============ KUMANDA PANELİ ============ */
 async function sikistir(file, max, q){
@@ -950,10 +1015,12 @@ function panelKur(kok, tamSayfa){
     <header><div class="pn-logo">📡</div><div><h2>Tahta kumandası</h2><p id="pnDurum">Bağlanıyor…</p></div>
       ${tamSayfa ? '' : '<button class="pn-kapat" id="pnKapat" aria-label="Kapat">✕</button>'}</header>
 
+    <div class="pn-uyari" id="pnUyari" hidden></div>
+
     <section><h3>Hangi okuldayım? <small>tahtada logonun altında yazar</small></h3>
       <div class="pn-okullar" id="pnOkullar"></div>
       <div class="pn-row" style="margin-top:10px"><input type="text" id="pnOkulYeni" maxlength="40" placeholder="Yeni okul adı yaz" style="margin:0;flex:3 1 0">
-        <button class="birincil" id="pnOkulEkle" style="flex:1 1 0">Ekle</button></div>
+        <button class="birincil" id="pnOkulEkle" style="flex:1 1 0">Ekle ve seç</button></div>
     </section>
 
     <section><h3>Şu an hangi sınıf derste?</h3><div class="pn-grid" id="pnSinif">
@@ -999,6 +1066,9 @@ function panelKur(kok, tamSayfa){
   </div>`;
 
   const durum = () => {
+    const u = $('#pnUyari');
+    if(tamSayfa && !Store.bulut){ u.hidden = false; u.innerHTML = '<b>⚠️ Bu telefon tahtaya bağlı değil.</b> Burada yaptığın değişiklikler yalnızca bu telefonda kalır. Okul adını ve kendi adını <b>tahtada üstüne dokunarak</b> hemen değiştirebilirsin. Telefondan yönetmek için en alttaki “Kurulum ve bağlantılar” bölümünden Firebase bilgini ekle.'; }
+    else u.hidden = true;
     $('#pnDurum').textContent = Store.bulut ? `● Canlı bağlı · ${ODA}` : '● Yerel mod · telefondan göndermek için Firebase ayarı gerekli';
     $('#pnFbAlan').innerHTML = Store.bulut ? '<p class="pn-kucuk">Bulut bağlantısı çalışıyor ✅</p>' :
       `<p class="pn-kucuk">Firebase bilgisini dosyanın en üstündeki <code>FIREBASE_CONFIG</code> alanına yapıştırmak en sağlamıdır. Hızlı deneme için buraya da yapıştırabilirsin (yalnızca bu cihazda saklanır):</p>
@@ -1118,7 +1188,7 @@ function duyuruAktifS(s){ return !!(s.duyuru && (!s.duyuruBitis || Date.now() < 
   // fare hareket edince kumanda düğmesi görünür (tahtada Lively kullanılıyorsa gizli kalır)
   let fz; addEventListener('pointermove', () => { document.body.classList.add('fare'); clearTimeout(fz); fz = setTimeout(() => document.body.classList.remove('fare'), 3000); });
   $('#disli').onclick = () => panelAc(false);
-  addEventListener('keydown', e => { if(e.key === 'k' || e.key === 'K') panelAc(false); if(e.key === 'Escape') $('#panelKatman').classList.remove('acik'); });
+  addEventListener('keydown', e => { if(/^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName)) return; if(e.key === 'k' || e.key === 'K') panelAc(false); if(e.key === 'Escape') $('#panelKatman').classList.remove('acik'); });
 
   await Store.init();
   Store.on('state', s => durumUygula(s));
